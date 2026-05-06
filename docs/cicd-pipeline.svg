@@ -1,0 +1,84 @@
+<svg width="1200" height="620" viewBox="0 0 1200 620" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Jenkins CI/CD Pipeline</title>
+  <desc id="desc">CI/CD diagram showing Jenkins cloning code, generating commit hash, building and pushing images, transferring files, deploying to EC2, and running docker compose.</desc>
+  <defs>
+    <style>
+      .bg { fill: #fbfdff; }
+      .step { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 14; }
+      .source { fill: #eff6ff; stroke: #2563eb; }
+      .build { fill: #fff7ed; stroke: #ea580c; }
+      .deploy { fill: #ecfdf5; stroke: #059669; }
+      .secret { fill: #fdf2f8; stroke: #db2777; }
+      .title { fill: #0f172a; font-family: Arial, sans-serif; font-size: 30px; font-weight: 700; }
+      .label { fill: #0f172a; font-family: Arial, sans-serif; font-size: 18px; font-weight: 700; }
+      .small { fill: #475569; font-family: Arial, sans-serif; font-size: 14px; }
+      .tiny { fill: #64748b; font-family: Arial, sans-serif; font-size: 13px; }
+      .arrow { stroke: #334155; stroke-width: 2.4; fill: none; marker-end: url(#arrowhead); }
+      .dash { stroke: #db2777; stroke-width: 2.2; fill: none; stroke-dasharray: 7 6; marker-end: url(#pinkArrow); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <marker id="pinkArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#db2777"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="620"/>
+  <text x="52" y="58" class="title">Jenkins CI/CD Pipeline to EC2</text>
+  <text x="52" y="88" class="small">Images are tagged with the short Git commit hash and deployed through Docker Compose on the EC2 host.</text>
+
+  <rect x="50" y="170" width="150" height="94" class="step source"/>
+  <text x="88" y="205" class="label">Push Code</text>
+  <text x="78" y="232" class="small">GitHub repo</text>
+
+  <rect x="250" y="170" width="150" height="94" class="step source"/>
+  <text x="292" y="205" class="label">Clone</text>
+  <text x="272" y="232" class="small">clonecode()</text>
+
+  <rect x="450" y="170" width="150" height="94" class="step source"/>
+  <text x="484" y="205" class="label">Commit Tag</text>
+  <text x="478" y="232" class="small">COMMIT_HASH</text>
+
+  <rect x="650" y="170" width="150" height="94" class="step build"/>
+  <text x="690" y="205" class="label">Build</text>
+  <text x="664" y="232" class="small">Docker images</text>
+
+  <rect x="850" y="170" width="150" height="94" class="step build"/>
+  <text x="894" y="205" class="label">Push</text>
+  <text x="866" y="232" class="small">GitLab registry</text>
+
+  <rect x="250" y="372" width="150" height="94" class="step deploy"/>
+  <text x="284" y="407" class="label">Transfer</text>
+  <text x="270" y="434" class="small">Compose + Nginx</text>
+
+  <rect x="450" y="372" width="150" height="94" class="step deploy"/>
+  <text x="488" y="407" class="label">Deploy</text>
+  <text x="476" y="434" class="small">SSH to EC2</text>
+
+  <rect x="650" y="372" width="150" height="94" class="step deploy"/>
+  <text x="690" y="407" class="label">Pull</text>
+  <text x="672" y="434" class="small">Tagged images</text>
+
+  <rect x="850" y="372" width="150" height="94" class="step deploy"/>
+  <text x="876" y="407" class="label">Compose Up</text>
+  <text x="872" y="434" class="small">docker compose</text>
+
+  <rect x="1000" y="72" width="150" height="94" class="step secret"/>
+  <text x="1034" y="107" class="label">Infisical</text>
+  <text x="1018" y="134" class="small">Secrets export</text>
+
+  <path d="M200 217 H250" class="arrow"/>
+  <path d="M400 217 H450" class="arrow"/>
+  <path d="M600 217 H650" class="arrow"/>
+  <path d="M800 217 H850" class="arrow"/>
+  <path d="M1000 217 C1080 250 1080 350 1000 419" class="arrow"/>
+  <path d="M850 419 H800" class="arrow"/>
+  <path d="M650 419 H600" class="arrow"/>
+  <path d="M450 419 H400" class="arrow"/>
+
+  <path d="M1040 166 C980 178 876 184 800 196" class="dash"/>
+  <text x="872" y="149" class="tiny">build args</text>
+  <path d="M1048 166 C982 250 760 318 600 385" class="dash"/>
+  <text x="712" y="316" class="tiny">runtime env export</text>
+</svg>

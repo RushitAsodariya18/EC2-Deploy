@@ -1,0 +1,101 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Dockerized EC2 Architecture</title>
+  <desc id="desc">Architecture diagram showing browser traffic into EC2, Nginx routing to React frontend and Express backend, backend connecting to MongoDB, and Jenkins pushing images to a container registry.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 16; }
+      .ec2 { fill: #f8fbff; stroke: #2563eb; stroke-width: 3; rx: 20; }
+      .box { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 14; }
+      .proxy { fill: #ecfdf5; stroke: #059669; }
+      .frontend { fill: #eff6ff; stroke: #2563eb; }
+      .backend { fill: #fff7ed; stroke: #ea580c; }
+      .db { fill: #f0fdf4; stroke: #16a34a; }
+      .cicd { fill: #fdf2f8; stroke: #db2777; }
+      .registry { fill: #f5f3ff; stroke: #7c3aed; }
+      .title { fill: #0f172a; font-family: Arial, sans-serif; font-size: 30px; font-weight: 700; }
+      .label { fill: #0f172a; font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; }
+      .small { fill: #475569; font-family: Arial, sans-serif; font-size: 15px; }
+      .tiny { fill: #64748b; font-family: Arial, sans-serif; font-size: 13px; }
+      .arrow { stroke: #334155; stroke-width: 2.4; fill: none; marker-end: url(#arrowhead); }
+      .arrow-blue { stroke: #2563eb; stroke-width: 2.6; fill: none; marker-end: url(#arrowheadBlue); }
+      .arrow-green { stroke: #059669; stroke-width: 2.6; fill: none; marker-end: url(#arrowheadGreen); }
+      .arrow-purple { stroke: #7c3aed; stroke-width: 2.6; fill: none; marker-end: url(#arrowheadPurple); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <marker id="arrowheadBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowheadGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#059669"/>
+    </marker>
+    <marker id="arrowheadPurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="720"/>
+  <text x="52" y="58" class="title">Dockerized EC2 Deployment Architecture</text>
+  <text x="52" y="88" class="small">React frontend, Express backend, MongoDB, Nginx reverse proxy, Docker Compose, Jenkins, and registry-based deployment.</text>
+
+  <rect x="48" y="130" width="210" height="118" class="panel"/>
+  <text x="82" y="178" class="label">User Browser</text>
+  <text x="82" y="208" class="small">HTTP request</text>
+  <text x="82" y="230" class="tiny">http://EC2_PUBLIC_IP/</text>
+
+  <rect x="330" y="112" width="780" height="470" class="ec2"/>
+  <text x="362" y="156" class="label">AWS EC2 Instance</text>
+  <text x="362" y="182" class="small">Docker Compose runs all application containers</text>
+
+  <rect x="395" y="230" width="210" height="110" class="box proxy"/>
+  <text x="435" y="272" class="label">Nginx</text>
+  <text x="435" y="300" class="small">Reverse proxy</text>
+  <text x="435" y="322" class="tiny">host 80 -> container 80</text>
+
+  <rect x="705" y="210" width="250" height="110" class="box frontend"/>
+  <text x="744" y="252" class="label">React Frontend</text>
+  <text x="744" y="280" class="small">Static SPA</text>
+  <text x="744" y="302" class="tiny">served by Nginx image</text>
+
+  <rect x="705" y="365" width="250" height="110" class="box backend"/>
+  <text x="744" y="407" class="label">Express Backend</text>
+  <text x="744" y="435" class="small">Node.js REST API</text>
+  <text x="744" y="457" class="tiny">/goals CRUD endpoints</text>
+
+  <rect x="430" y="420" width="210" height="112" class="box db"/>
+  <text x="480" y="462" class="label">MongoDB</text>
+  <text x="480" y="490" class="small">Persistent data</text>
+  <text x="480" y="512" class="tiny">volume: data:/data/db</text>
+
+  <rect x="60" y="500" width="230" height="108" class="box cicd"/>
+  <text x="108" y="542" class="label">Jenkins</text>
+  <text x="108" y="570" class="small">CI/CD pipeline</text>
+  <text x="108" y="592" class="tiny">shared library: vars/</text>
+
+  <rect x="478" y="620" width="285" height="66" class="box registry"/>
+  <text x="535" y="650" class="label">Container Registry</text>
+  <text x="535" y="674" class="tiny">backend/frontend images tagged by COMMIT_HASH</text>
+
+  <path d="M258 189 H377" class="arrow-blue"/>
+  <text x="274" y="176" class="tiny">HTTP :80</text>
+
+  <path d="M605 265 H705" class="arrow-green"/>
+  <text x="628" y="252" class="tiny">/</text>
+
+  <path d="M605 305 C650 340 658 390 705 420" class="arrow-green"/>
+  <text x="610" y="365" class="tiny">/api/* -> /*</text>
+
+  <path d="M705 444 C675 466 672 474 640 476" class="arrow"/>
+  <text x="646" y="460" class="tiny">mongoose</text>
+
+  <path d="M290 554 C360 610 408 645 478 653" class="arrow-purple"/>
+  <text x="312" y="616" class="tiny">build and push</text>
+
+  <path d="M763 653 C934 650 1012 565 955 475" class="arrow-purple"/>
+  <text x="914" y="620" class="tiny">docker pull</text>
+
+  <path d="M175 500 C210 380 250 185 330 165" class="arrow-purple"/>
+  <text x="198" y="392" class="tiny">SSH deploy to EC2</text>
+</svg>
