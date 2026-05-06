@@ -111,7 +111,7 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    jenkinsfile[Jenkinsfile<br/>@Library training-lib]
+    jenkinsfile["Jenkinsfile<br/>@Library training-lib"]
 
     jenkinsfile --> clonecode[clonecode]
     jenkinsfile --> buildandpush[buildandpush]
